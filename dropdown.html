@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Menu Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css">
+
+    <style>
+        .dropdown {
+            /* Border */
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            display: flex;
+
+            /* Reset list styles */
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .dropdown li {
+            /* Spacing */
+            padding: 8px;
+
+            /* Used to position the sub dropdown */
+            position: relative;
+        }
+
+        /* The sub dropdown */
+        .dropdown ul {
+            /* Border */
+            border: 1px solid rgba(0, 0, 0, 0.3);
+
+            /* Hidden by default */
+            display: none;
+
+            /* Absolute position */
+            left: 0;
+            position: absolute;
+            top: 100%;
+
+            /* Reset styles */
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+
+            /* Width */
+            width: 200px;
+        }
+
+        /* The second level sub dropdown */
+        .dropdown ul ul {
+            left: 100%;
+            position: absolute;
+            top: 0;
+        }
+
+        /* Change background color of list item when being hovered */
+        .dropdown li:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Show the direct sub dropdown when hovering the list item */
+        .dropdown li:hover > ul {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <form>
+        <label for="ccn">Credit Card Number:</label>
+        <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx">
+        
+        <div class="container">
+            <div class="row">
+                <div class='col-sm-6'>
+                    <div class="form-group">
+                        <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <ul class="dropdown">
+        <li>Home</li>
+        <li>
+            <div>Patterns</div>
+            <!-- First level sub dropdown -->
+            <ul>
+                <li>Layout</li>
+                <li>Input</li>
+                <li>
+                    <div>Navigation</div>
+                    <!-- Second level sub dropdown -->
+                    <ul>
+                        <li>Breadcrumb</li>
+                        <li>Dropdown</li>
+                        <li>Menu</li>
+                        <li>Nested dropdown</li>
+                    </ul>
+                </li>
+                <li>Display</li>
+                <li>Feedback</li>
+            </ul>
+        </li>
+        <li>Products</li>
+        <li>About</li>
+    </ul>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script>
+        $(function() {
+            Date.prototype.addHours= function(h){
+                this.setHours(this.getHours()+h);
+                return this;
+            }
+            var today = new Date().addHours(1.5);
+            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+            $('#datetimepicker1').datetimepicker({
+                defaultDate:moment(time, "hh:mm:a"),
+                format: 'hh:mm:a'
+            });
+        });
+    </script>
+</body>
+</html>
